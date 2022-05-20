@@ -1,9 +1,5 @@
-import React from 'react'
+import React from "react";
 
-
-
-export default function NewPokemon() {
-  return (
-    <div>Nuevo Pokemon</div>
-  )
+export default function NewPokemon({ active }) {
+	return active && <div>Nuevo Pokemon</div>;
 }

@@ -1,13 +1,75 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+	--primary: #ffffff;
+	--secondary: #6658f3;
+	--typography: "Helvetica Neue", sans-serif;
+	--font-size: 1.1rem;
+	--input-placeholder: #d1cfcf;
+	--border: 2px solid #d0d1d5;
+	--icon-color: #9c9c9c;
+	--invalid-color: #bb5a68;
+	--bottom-spacing: 1rem;
+	--radius: 2px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+	font-size: var(--font-size);
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+	background: var(--primary);
+	background-image: radial-gradient(#c3c3c3 1px, transparent 0),
+		radial-gradient(#f2f2f2 1px, transparent 0);
+	background-size: 40px 40px, 8px 8px;
+	background-position: -19px -19px;
+	font-family: var(--typography);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.text-input {
+	border: var(--border);
+	background-color: var(--primary);
+	border-radius: var(--radius);
+	padding: 0.4rem;
+}
+
+.text-input > input {
+	border: none;
+}
+.text-input > span {
+	vertical-align: middle;
+}
+.text-input svg {
+	color: var(--icon-color);
+}
+.text-input > input::placeholder {
+	color: var(--input-placeholder);
+}
+
+.text-input.invalid {
+	border-color: var(--invalid-color);
+}
+
+button {
+	background-color: var(--secondary);
+	padding: 0.5rem 1rem;
+	color: var(--primary);
+	border: none;
+	border-radius: var(--radius);
+}
+
+button > span {
+	vertical-align: middle;
+}
+
+main {
+	max-width: 1600px;
+	width: 80%;
+	margin: 0 auto;
+}
+main > * {
+	margin-bottom: var(--bottom-spacing);
 }

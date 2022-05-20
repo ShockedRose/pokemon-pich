@@ -1,8 +1,17 @@
-import { render, screen } from '@testing-library/react';
+import React from "react";
+import "@testing-library/jest-dom/extend-expect";
+import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('Renders the application', () => {
+  const component = render(<App />);
+  const header = screen.getByText("Listado de Pokemon")
+  expect(header).toBeInTheDocument()
+});
+
+test('It fetches data', async () => {
+  const component = render(<App />);
+  const button = screen.getByText("Hello")
+  fireEvent.click(button)
+  await screen.findByText("200")
 });

@@ -3,15 +3,15 @@ import TextInput from "components/TextInput";
 import RangeInput from "components/RangeInput";
 import Button from "components/Button";
 import { RiSave3Fill, RiCloseFill } from "react-icons/ri";
-import { createPokemon } from "api";
+import { updatePokemon } from "api";
 
-export default function NewPokemon({ onCancel, refreshList }) {
+export default function EditPokemon({ selected, onCancel, refreshList }) {
 	const [disabled, setDisabled] = useState(true);
 	const [invalidName, setinvalidName] = useState(false);
 
 	return (
 		<section className="form-container">
-			<h2>Agregar Pokemon</h2>
+			<h2>Editar Pokemon</h2>
 			<form
 				onSubmit={async (e) => {
 					e.preventDefault();
@@ -19,16 +19,19 @@ export default function NewPokemon({ onCancel, refreshList }) {
 						return;
 					}
 					const pokemon = {
-						hp: Math.floor(Math.random() * 100),
-						type: "normal",
+						hp: selected.hp,
+						type: selected.type,
 						name: e.target[0].value,
 						image: e.target[1].value,
 						attack: parseInt(e.target[2].value),
 						defense: parseInt(e.target[3].value),
-						idAuthor: localStorage.getItem("author"),
+						idAuthor: selected.idAuthor,
 					};
 					try {
-						const response = await createPokemon(pokemon);
+						const response = await updatePokemon(
+							selected.id,
+							pokemon
+						);
 						if (!response.ok) throw new Error("Error");
 						refreshList();
 						onCancel();
@@ -50,12 +53,15 @@ export default function NewPokemon({ onCancel, refreshList }) {
 									: setDisabled(false) ||
 									  setinvalidName(false)
 							}
+							initialValue={selected.name}
 						/>
 						<TextInput
 							label={"Imagen"}
 							labelId="image"
 							name="image"
 							placeholder={"url"}
+							initialValue={selected.image}
+							onBlur={() => setDisabled(false)}
 						/>
 					</div>
 					<div className="input-column">
@@ -63,11 +69,15 @@ export default function NewPokemon({ onCancel, refreshList }) {
 							label={"Ataque"}
 							labelId="attack"
 							name="attack"
+							initialValue={selected.attack}
+							onBlur={(e) => setDisabled(false)}
 						/>
 						<RangeInput
 							label={"Defensa"}
 							labelId="defense"
 							name="defense"
+							initialValue={selected.defense}
+							onBlur={(e) => setDisabled(false)}
 						/>
 					</div>
 				</div>

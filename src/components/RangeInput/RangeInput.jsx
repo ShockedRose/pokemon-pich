@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 
-export default function TextInput({
-	onBlur,
+export default function RangeInput({
 	label,
 	labelId,
-	placeholder,
 	name,
-	onKeyDown,
-	icon,
-	initialValue = "",
-	className = "",
+	initialValue = 50,
+	onBlur,
 }) {
 	const [value, setValue] = useState(initialValue);
 
@@ -20,18 +16,18 @@ export default function TextInput({
 	return (
 		<div className="flex-container align-middle justify-between">
 		{label && <label htmlFor={labelId}>{label}: &nbsp;</label>}
-			<div className={`text-input ${className}`}>
-				{icon && <span role="img">{icon}</span>}
+			<div className="range-input">0 &nbsp; 
 				<input
-					type="text"
-					placeholder={placeholder}
+				className="styled-slider slider-progress"
+					type="range"
+					min={0}
+					max={100}
 					name={name}
 					id={labelId || ""}
 					onChange={onChange}
-					onBlur={onBlur}
-					onKeyDown={onKeyDown}
 					value={value}
-				/>
+					onBlur={onBlur}
+				/> 100
 			</div>
 		</div>
 	);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import TextInput from "components/TextInput";
 import { FiSearch } from "react-icons/fi";
 
